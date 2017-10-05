@@ -17,35 +17,24 @@ source:
     - gg_extras.patch  # [win]
 
 build:
-  number: 15
+  number: 16
   features:
-    - vc9  # [win and py27]
-    - vc10  # [win and py34]
-    - vc14  # [win and py35]
+    - vc{{ vc }}  # [win]
 
 requirements:
   build:
-    - python  # [win]
-    - sqlite 3.13.*
-    - geos 3.5.1
-    - proj4 4.9.3
-    - freexl
-    - zlib 1.2.*
-    - libxml2 2.9.*
     - pkg-config  # [not win]
-    - vc 9  # [win and py27]
-    - vc 10  # [win and py34]
-    - vc 14  # [win and py35]
-  run:
-    - sqlite 3.13.*
-    - geos 3.5.1
-    - proj4 4.9.3
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - sqlite
+    - geos
+    - proj4
     - freexl
-    - zlib 1.2.*
-    - libxml2 2.9.*
-    - vc 9  # [win and py27]
-    - vc 10  # [win and py34]
-    - vc 14  # [win and py35]
+    - zlib
+    - libxml2
+  run:
+    - freexl
 
 test:
   commands:
