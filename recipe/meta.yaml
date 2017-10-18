@@ -17,9 +17,12 @@ source:
     - gg_extras.patch  # [win]
 
 build:
-  number: 16
+  number: 17
   features:
     - vc{{ vc }}  # [win]
+  run_exports:
+    # No idea.  Staying with minor version pin.
+    - {{ pin_subpackage('libspatialite', max_pin='x.x') }}
 
 requirements:
   build:
@@ -33,8 +36,6 @@ requirements:
     - freexl
     - zlib
     - libxml2
-  run:
-    - freexl
 
 test:
   commands:
