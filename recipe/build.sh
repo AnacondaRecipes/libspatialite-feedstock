@@ -3,7 +3,8 @@
 export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
 export CFLAGS="-I$PREFIX/include $CFLAGS"
 
-./configure --prefix=$PREFIX
+autoreconf -vfi
+./configure --prefix=$PREFIX --host=$HOST --enable-static=no
 
 make
 # Commented out due to failures:

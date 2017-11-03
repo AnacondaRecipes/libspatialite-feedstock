@@ -26,6 +26,9 @@ build:
 
 requirements:
   build:
+    - autoconf  # [linux]
+    - automake  # [linux]
+    - libtool   # [linux]
     - pkg-config  # [not win]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
