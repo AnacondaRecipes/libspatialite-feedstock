@@ -1,6 +1,10 @@
 #!/bin/bash
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* .
 
-export LDFLAGS="-L${PREFIX}/lib ${LDFLAGS}"
+# export LDFLAGS="-L${PREFIX}/lib ${LDFLAGS}"
+# The flag -Wl,--allow-multiple-definition solves issues with libraries needed to build the package
+export LDFLAGS="-L${PREFIX}/lib ${LDFLAGS}-Wl,--allow-multiple-definition"
 # The `ACCEPT_USE_OF_DEPRECATED_PROJ_API_H` is a temporary solution and won't work with proj4 7.
 export CFLAGS="-I${PREFIX}/include -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H=1  ${CFLAGS}"
 
