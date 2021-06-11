@@ -5,7 +5,7 @@ package:
   version: {{ version }}
 
 source:
-  url: http://www.gaia-gis.it/gaia-sins/libspatialite-{{ version }}.tar.gz
+  url: http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-{{ version }}.tar.gz
   sha256: 88900030a4762904a7880273f292e5e8ca6b15b7c6c3fb88ffa9e67ee8a5a499
   patches:
     # Skips 3 tests (check_extension, check_sql_stmt, and check_get_normal_zoom_extension_load) that are failing on OS X.

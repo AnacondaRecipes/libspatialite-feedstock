@@ -9,10 +9,19 @@ if [ -f ${PREFIX}/${HOST}/lib/libstdc++.la ]; then
     find ${PREFIX} -name "*.la" -print0 | xargs -0 rm
 fi
 
-./configure --prefix=${PREFIX} \
-            --host=${HOST} \
-            --build=${BUILD} \
-            --enable-static=no
+cp $RECIPE_DIR/config.sub .
+
+if [[ $(uname -m) == "aarch64" ]]; then
+  ./configure --prefix=${PREFIX} \
+              --host=aarch64-linux-gnu \
+              --build=aarch64-linux-gnu \
+              --enable-static=no
+else
+  ./configure --prefix=${PREFIX} \
+              --host=${HOST} \
+              --build=${BUILD} \
+              --enable-static=no
+fi
 
 make
 # Commented out due to failures:
