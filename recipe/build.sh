@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# make sure arm64 is a known host ...
+cp -r ${BUILD_PREFIX}/share/libtool/build-aux/config.* .
 export LDFLAGS="-L${PREFIX}/lib ${LDFLAGS}"
 # The `ACCEPT_USE_OF_DEPRECATED_PROJ_API_H` is a temporary solution and won't work with proj4 7.
 export CFLAGS="-I${PREFIX}/include -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H=1  ${CFLAGS}"
@@ -8,8 +10,6 @@ export CFLAGS="-I${PREFIX}/include -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H=1  ${CF
 if [ -f ${PREFIX}/${HOST}/lib/libstdc++.la ]; then
     find ${PREFIX} -name "*.la" -print0 | xargs -0 rm
 fi
-
-cp $RECIPE_DIR/config.sub .
 
 if [[ $(uname -m) == "aarch64" ]]; then
   ./configure --prefix=${PREFIX} \
