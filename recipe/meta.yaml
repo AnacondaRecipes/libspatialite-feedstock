@@ -36,7 +36,7 @@ requirements:
     - libiconv  # [osx]
     - sqlite
     - geos
-    - proj
+    - proj <8.0.0  # proj_api.h header is removed in newer versions
     - freexl
     - zlib
     - libxml2
@@ -44,7 +44,7 @@ requirements:
     - libiconv  # [osx]
     - sqlite
     - geos
-    - proj
+    - proj <8.0.0  # proj_api.h header is removed in newer versions
     - freexl
     - zlib
     - libxml2
