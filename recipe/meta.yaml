@@ -34,7 +34,7 @@ requirements:
     - {{ compiler('cxx') }}
     - make  # [not win]
   host:
-    - libiconv  # [osx]
+    - libiconv  # [osx or win]
     - sqlite
     - geos
     - proj <8.0.0  # proj_api.h header is removed in newer versions
@@ -42,7 +42,7 @@ requirements:
     - zlib
     - libxml2
   run:
-    - libiconv  # [osx]
+    - libiconv  # [osx or win]
     - sqlite
     - geos
     - proj <8.0.0  # proj_api.h header is removed in newer versions
