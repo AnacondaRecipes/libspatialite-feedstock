@@ -18,7 +18,7 @@ source:
 
 build:
   number: 20
-  # Missing dependencies on s390x
+  # Missing dependencies freexl, proj and geos on s390x.
   skip: True  # [(win and vc<14) or s390x]
   run_exports:
     # No idea.  Staying with minor version pin.
