@@ -18,7 +18,8 @@ source:
 
 build:
   number: 20
-  skip: True  # [win and vc<14]
+  # Missing dependencies on s390x
+  skip: True  # [(win and vc<14) or s390x]
   run_exports:
     # No idea.  Staying with minor version pin.
     - {{ pin_subpackage('libspatialite', max_pin='x.x') }}
