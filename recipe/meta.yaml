@@ -17,8 +17,9 @@ source:
     - proj_api.patch  # [win]
 
 build:
-  number: 0
-  skip: True  # [win and vc<14]
+  number: 20
+  # Missing dependencies freexl, proj and geos on s390x.
+  skip: True  # [(win and vc<14) or s390x]
   run_exports:
     # No idea.  Staying with minor version pin.
     - {{ pin_subpackage('libspatialite', max_pin='x.x') }}
@@ -33,7 +34,7 @@ requirements:
     - {{ compiler('cxx') }}
     - make  # [not win]
   host:
-    - libiconv  # [osx]
+    - libiconv  # [osx or win]
     - sqlite
     - geos
     - proj <8.0.0  # proj_api.h header is removed in newer versions
@@ -41,7 +42,7 @@ requirements:
     - zlib
     - libxml2
   run:
-    - libiconv  # [osx]
+    - libiconv  # [osx or win]
     - sqlite
     - geos
     - proj <8.0.0  # proj_api.h header is removed in newer versions
