@@ -37,7 +37,9 @@ requirements:
     - libiconv  # [osx or win]
     - sqlite
     - geos
-    - proj <8.0.0  # proj_api.h header is removed in newer versions
+    # This used to be pinned here to <8.0.0, but we need to follow the pinning
+    # in conda_build_config.yaml.
+    - proj
     - freexl
     - zlib
     - libxml2
@@ -45,7 +47,9 @@ requirements:
     - libiconv  # [osx or win]
     - sqlite
     - geos
-    - proj <8.0.0  # proj_api.h header is removed in newer versions
+    # This used to be pinned here to <8.0.0, but we need to follow the pinning
+    # in conda_build_config.yaml.
+    - proj
     - freexl
     - zlib
     - libxml2
