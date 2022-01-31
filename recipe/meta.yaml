@@ -33,7 +33,9 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make  # [not win]
-  host:
+    - patch       # [not win]
+    - m2-patch    # [win]
+   host:
     - libiconv  # [osx or win]
     - sqlite
     - geos
