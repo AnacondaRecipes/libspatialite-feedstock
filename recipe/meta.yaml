@@ -63,6 +63,16 @@ about:
   license_family: LGPL
   license_file: COPYING
   summary: 'Extend the SQLite core to support fully fledged Spatial SQL capabilities'
+  desciption: |
+    SpatiaLite is an open source library intended to extend the SQLite core to
+    support fully fledged Spatial SQL capabilities.
+    SQLite is intrinsically simple and lightweight. It implemented as
+    a single lightweight library implementing the full SQL engine
+    standard SQL implementation: almost complete SQL-92.
+    There is no complex client/server architecture.
+    A whole database simply corresponds to a single monolithic file (no size limits)
+    any DB-file can be safely exchanged across different platforms, because the
+    internal architecture is universally portable no installation, no configuration.
 
 extra:
   recipe-maintainers:
