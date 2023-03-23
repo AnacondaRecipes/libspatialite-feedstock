@@ -15,47 +15,46 @@ source:
     - makefile.vc.patch  # [win]
     - config-msvc.patch  # [win]
     - gg_extras.patch  # [win]
-    - proj_api.patch  # [win]
+    - proj_api.patch
 
 build:
-  number: 21
+  number: 22
   # Missing dependencies freexl, proj and geos on s390x.
-  skip: True  # [(win and vc<14) or s390x]
+  skip: true  # [(win and vc<14) or s390x]
   run_exports:
     # No idea.  Staying with minor version pin.
     - {{ pin_subpackage('libspatialite', max_pin='x.x') }}
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - autoconf  # [unix]
     - automake  # [unix]
     - libtool   # [unix]
-    - pkg-config  # [not win]
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - m2-patch    # [win]
     - make  # [not win]
     - patch       # [not win]
-    - m2-patch    # [win]
+    - pkg-config  # [not win]
   host:
-    - libiconv  # [osx or win]
-    - sqlite
-    - geos
-    # This used to be pinned here to <8.0.0, but we need to follow the pinning
-    # in conda_build_config.yaml.
-    - proj
     - freexl
+    - geos
+    - libiconv  # [osx or win]
+    - libxml2 2.10
+    # This used to be pinned here to <8.0.0.
+    - proj <8.0.0
+    - sqlite
     - zlib
-    - libxml2
   run:
-    - libiconv  # [osx or win]
-    - sqlite
+    - freexl
     - geos
+    - libiconv  # [osx or win]
+    - libxml2 >=2.10,<2.11.0a0
     # This used to be pinned here to <8.0.0, but we need to follow the pinning
     # in conda_build_config.yaml.
     - proj
-    - freexl
+    - sqlite
     - zlib
-    - libxml2
 
 about:
   home: https://www.gaia-gis.it/fossil/libspatialite/index
@@ -73,6 +72,8 @@ about:
     A whole database simply corresponds to a single monolithic file (no size limits)
     any DB-file can be safely exchanged across different platforms, because the
     internal architecture is universally portable no installation, no configuration.
+  doc_url: https://www.gaia-gis.it/fossil/libspatialite/index
+  dev_url: https://www.gaia-gis.it/fossil/libspatialite/dir?type=tree
 
 extra:
   recipe-maintainers:
