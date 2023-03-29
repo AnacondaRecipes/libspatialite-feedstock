@@ -18,7 +18,7 @@ source:
     - proj_api.patch
 
 build:
-  number: 22
+  number: 23
   # Missing dependencies freexl, proj and geos on s390x.
   skip: true  # [(win and vc<14) or s390x]
   run_exports:
@@ -42,7 +42,7 @@ requirements:
     - libiconv  # [osx or win]
     - libxml2 2.10
     # This used to be pinned here to <8.0.0.
-    - proj <8.0.0
+    - proj
     - sqlite
     - zlib
   run:
