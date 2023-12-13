@@ -1,28 +1,18 @@
-{% set version = "4.3.0a" %}
+{% set version = "5.1.0" %}
 
 package:
   name: libspatialite
   version: {{ version }}
 
 source:
-  url: http://archive.ubuntu.com/ubuntu/pool/universe/s/spatialite/spatialite_{{ version }}.orig.tar.gz
-  # url: http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-{{ version }}.tar.gz
-  sha256: 88900030a4762904a7880273f292e5e8ca6b15b7c6c3fb88ffa9e67ee8a5a499
-  patches:
-    # Skips 3 tests (check_extension, check_sql_stmt, and check_get_normal_zoom_extension_load) that are failing on OS X.
-    # Re-visit this once a new release is out.
-    - skip_failing_test.patch  # [osx]
-    - makefile.vc.patch  # [win]
-    - config-msvc.patch  # [win]
-    - gg_extras.patch  # [win]
-    - proj_api.patch
+  url: http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-{{ version }}.tar.gz
+  sha256: 43be2dd349daffe016dd1400c5d11285828c22fea35ca5109f21f3ed50605080
 
 build:
-  number: 23
-  # Missing dependencies freexl, proj and geos on s390x.
+  number: 0
+  # Missing dependencies freexl and geos on s390x.
   skip: true  # [(win and vc<14) or s390x]
   run_exports:
-    # No idea.  Staying with minor version pin.
     - {{ pin_subpackage('libspatialite', max_pin='x.x') }}
 
 requirements:
@@ -32,26 +22,24 @@ requirements:
     - autoconf  # [unix]
     - automake  # [unix]
     - libtool   # [unix]
-    - m2-patch    # [win]
-    - make  # [not win]
-    - patch       # [not win]
+    #- m2-patch    # [win]
+    #- make  # [not win]
+    #- patch       # [not win]
     - pkg-config  # [not win]
   host:
-    - freexl
+    # Even though documentation states otherwise during build freexl <2.0.0 throws error in config.
+    - freexl >2
     - geos
     - libiconv  # [osx or win]
     - libxml2 2.10
-    # This used to be pinned here to <8.0.0.
     - proj
     - sqlite
     - zlib
   run:
-    - freexl
+    - freexl >2
     - geos
     - libiconv  # [osx or win]
     - libxml2 >=2.10,<2.11.0a0
-    # This used to be pinned here to <8.0.0, but we need to follow the pinning
-    # in conda_build_config.yaml.
     - proj
     - sqlite
     - zlib
