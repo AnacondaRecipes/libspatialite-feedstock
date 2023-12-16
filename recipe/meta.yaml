@@ -28,7 +28,7 @@ requirements:
     - pkg-config  # [not win]
   host:
     # Even though documentation states otherwise during build freexl <2.0.0 throws error in config.
-    - freexl >2
+    - freexl 2.0.0
     - geos
     - libiconv  # [osx or win]
     - libxml2 2.10
@@ -36,7 +36,7 @@ requirements:
     - sqlite
     - zlib
   run:
-    - freexl >2
+    - freexl >=2.0.0
     - geos
     - libiconv  # [osx or win]
     - libxml2 >=2.10,<2.11.0a0
