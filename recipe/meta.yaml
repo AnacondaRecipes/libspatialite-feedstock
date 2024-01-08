@@ -35,7 +35,7 @@ requirements:
     # Even though documentation states otherwise during build freexl <2.0.0 throws error in config.
     - freexl 2.0.0
     - geos {{ geos }}
-    - libiconv 1.16 # [osx or win]
+    - libiconv 1.16
     - libxml2 {{ libxml2 }}
     - proj {{ proj }}
     - sqlite {{ sqlite }}
@@ -45,7 +45,7 @@ requirements:
     # all bounds through run_exports
     - freexl
     - geos
-    - libiconv  # [osx or win]
+    - libiconv
     - libxml2
     - proj
     - sqlite
