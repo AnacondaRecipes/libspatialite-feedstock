@@ -190,3 +190,29 @@ Index: makefile_mod64.vc
  .c.obj:
  	$(CC) $(CFLAGS) /c $*.c /Fo$@
 
+Index: src/headers/spatialite/gaiaconfig-msvc.h
+==================================================================
+--- src/headers/spatialite/gaiaconfig-msvc.h
++++ src/headers/spatialite/gaiaconfig-msvc.h
+@@ -1,19 +1,19 @@
+ /* ./src/headers/spatialite/gaiaconfig-msvc.h.  Generated from gaiaconfig-msvc.h.in by configure.  */
+ /* ./src/headers/spatialite/gaiaconfig-msvc.h.in - manually maintained */
+ 
+ /* Should be defined in order to enable GCP support. */
+-#define ENABLE_GCP 1
++#define ENABLE_GCP 0
+ 
+ /* Should be defined in order to enable GeoPackage support. */
+ #define ENABLE_GEOPACKAGE 1
+ 
+ /* Should be defined in order to enable LIBXML2 support. */
+ #define ENABLE_LIBXML2 1
+ 
+ /* Should be defined in order to enable RTTOPO support. */
+-#define ENABLE_RTTOPO 1
++#define ENABLE_RTTOPO 0
+ 
+ /* Should be defined in order to enable GEOS_370 support. */
+ #define GEOS_370 1
+ 
+ /* Should be defined in order to enable GEOS_ADVANCED support. */
