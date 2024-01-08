@@ -5,8 +5,13 @@ package:
   version: {{ version }}
 
 source:
-  url: http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-{{ version }}.tar.gz
+  url: https://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-{{ version }}.tar.gz
   sha256: 43be2dd349daffe016dd1400c5d11285828c22fea35ca5109f21f3ed50605080
+  patches:
+    - patches/0001-win_fix_paths.patch    # [win]
+    - patches/0002-osx_fix_lib_ext.patch  # [osx]
+    # skip tests calling InitSpatialMetadataFull (which require GPL dependency RTTOPO through call of CreateVectorCoveragesTables)
+    - patches/0003-skip-GPL-tests.patch   # [unix]
 
 build:
   number: 0
@@ -22,35 +27,38 @@ requirements:
     - autoconf  # [unix]
     - automake  # [unix]
     - libtool   # [unix]
-    #- m2-patch    # [win]
-    #- make  # [not win]
-    #- patch       # [not win]
+    - m2-patch    # [win]
+    - make  # [not win]
+    - patch       # [not win]
     - pkg-config  # [not win]
   host:
     # Even though documentation states otherwise during build freexl <2.0.0 throws error in config.
     - freexl 2.0.0
-    - geos
-    - libiconv  # [osx or win]
-    - libxml2 2.10
-    - proj
-    - sqlite
-    - zlib
+    - geos {{ geos }}
+    - libiconv 1.16 # [osx or win]
+    - libxml2 {{ libxml2 }}
+    - proj {{ proj }}
+    - sqlite {{ sqlite }}
+    - zlib {{ zlib }}
+    - minizip 4.0.3
   run:
-    - freexl >=2.0.0
+    # all bounds through run_exports
+    - freexl
     - geos
     - libiconv  # [osx or win]
-    - libxml2 >=2.10,<2.11.0a0
+    - libxml2
     - proj
     - sqlite
     - zlib
+    - minizip
 
 about:
   home: https://www.gaia-gis.it/fossil/libspatialite/index
-  license: LGPL-2.1-or-later
-  license_family: LGPL
+  license: MPL-1.1 OR GPL-2.0 OR LGPL-2.1
+  license_family: OTHER
   license_file: COPYING
-  summary: 'Extend the SQLite core to support fully fledged Spatial SQL capabilities'
-  desciption: |
+  summary: Extend the SQLite core to support fully fledged Spatial SQL capabilities
+  description: |
     SpatiaLite is an open source library intended to extend the SQLite core to
     support fully fledged Spatial SQL capabilities.
     SQLite is intrinsically simple and lightweight. It implemented as

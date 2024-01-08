@@ -10,34 +10,17 @@ if [ -f ${PREFIX}/${HOST}/lib/libstdc++.la ]; then
 fi
 
 # Disabling geos 3.10 and 3.11 as we are building against geos 3.9
-# Disabling rttopo as currently not available in main channel
-# Disabling minizip to reduce dependencies (could enabled)
-
-if [[ $(uname -m) == "aarch64" ]]; then
-  ./configure --prefix=${PREFIX} \
-              --host=aarch64-linux-gnu \
-              --build=aarch64-linux-gnu \
-              --enable-static=no \
-              --enable-geos3100=no \
-              --enable-geos3110=no \
-              --enable-rttopo=no \
-              --enable-minizip=no
-
-else
+# Disabling rttopo and gcp as both modules strictly depend on code released under the GPLv2+
   ./configure --prefix=${PREFIX} \
               --host=${HOST} \
               --build=${BUILD} \
               --enable-static=no \
               --enable-geos3100=no \
               --enable-geos3110=no \
-              --enable-rttopo=no \
-              --enable-minizip=no
-fi
+              --disable-rttopo \
+              --disable-gcp \
+              --enable-minizip=yes
 
 make
-# Commented out due to failures:
-# FAIL: check_virtualtable2
-# FAIL: check_virtualtable
-# check_sql_stmt
-# make check
+make check || (cat test/test-suite.log; exit 1)
 make install
