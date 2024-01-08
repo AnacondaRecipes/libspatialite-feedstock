@@ -21,7 +21,7 @@ Index: makefile.vc
  
  CFLAGS = /nologo -I.\src\headers -I.\src\topology \
 -	-I. -IC:\OSGeo4W\include $(OPTFLAGS)
-+	-I. -I$(LIBRARY_INC) $(OPTFLAGS)
++	-I. -I$(LIBRARY_INC) $(OPTFLAGS) -DENABLE_RTTOPO=0 -DENABLE_GCP=0
  
  default:	all
  
@@ -70,18 +70,22 @@ Index: makefile64.vc
  
  CFLAGS = /nologo -I.\src\headers -I.\src\topology \
 -	-I. -IC:\OSGeo4W64\include -IC:\OSGeo4W64\include\libxml2 $(OPTFLAGS)
-+	-I. -I$(LIBRARY_INC) -I$(LIBRARY_INC)\libxml2 $(OPTFLAGS)
++	-I. -I$(LIBRARY_INC) -I$(LIBRARY_INC)\libxml2 $(OPTFLAGS) -DENABLE_RTTOPO=0 -DENABLE_GCP=0
  
  default:	all
  
  all: spatialite.lib spatialite_i.lib
  #$(EXIF_LOADER_EXE)
-@@ -114,10 +115,14 @@
+@@ -110,14 +111,14 @@
+ $(SPATIALITE_DLL):	spatialite_i.lib
+ 
+ spatialite_i.lib:     $(LIBOBJ)
+ 	link /dll /out:$(SPATIALITE_DLL) \
  		/implib:spatialite_i.lib $(LIBOBJ) \
- 		C:\OSGeo4W64\lib\proj_i.lib C:\OSGeo4W64\lib\geos_c.lib \
- 		C:\OSGeo4w64\lib\freexl_i.lib C:\OSGeo4w64\lib\iconv.lib \
- 		C:\OSGeo4W64\lib\sqlite3_i.lib C:\OSGeo4W64\lib\zlib.lib \
- 		C:\OSGeo4W64\lib\libxml2.lib C:\OSGeo4W64\lib\librttopo.lib
+-		C:\OSGeo4W64\lib\proj_i.lib C:\OSGeo4W64\lib\geos_c.lib \
+-		C:\OSGeo4w64\lib\freexl_i.lib C:\OSGeo4w64\lib\iconv.lib \
+-		C:\OSGeo4W64\lib\sqlite3_i.lib C:\OSGeo4W64\lib\zlib.lib \
+-		C:\OSGeo4W64\lib\libxml2.lib C:\OSGeo4W64\lib\librttopo.lib
 + 		$(LIBRARY_LIB)\proj.lib $(LIBRARY_LIB)\geos_c.lib \
 + 		$(LIBRARY_LIB)\freexl_i.lib $(LIBRARY_LIB)\iconv.lib \
 + 		$(LIBRARY_LIB)\sqlite3.lib $(LIBRARY_LIB)\zlib.lib \
@@ -115,7 +119,7 @@ Index: makefile_mod.vc
  
  CFLAGS = /nologo -I.\src\headers -I.\src\topology \
 -	-I. -IC:\OSGeo4W\include $(OPTFLAGS)
-+	-I. -I$(LIBRARY_INC) $(OPTFLAGS)
++	-I. -I$(LIBRARY_INC) $(OPTFLAGS) -DENABLE_RTTOPO=0 -DENABLE_GCP=0
  
  default:	all
  
@@ -164,7 +168,7 @@ Index: makefile_mod64.vc
  
  CFLAGS = /nologo -I.\src\headers -I.\src\topology \
 -	-I. -IC:\OSGeo4W64\include -IC:\OSGeo4W64\include\libxml2 $(OPTFLAGS)
-+	-I. -I$(LIBRARY_INC) -I$(LIBRARY_INC)\libxml2 $(OPTFLAGS)
++	-I. -I$(LIBRARY_INC) -I$(LIBRARY_INC)\libxml2 $(OPTFLAGS) -DENABLE_RTTOPO=0 -DENABLE_GCP=0
  
  default:	all
  
@@ -216,3 +220,51 @@ Index: src/headers/spatialite/gaiaconfig-msvc.h
  #define GEOS_370 1
  
  /* Should be defined in order to enable GEOS_ADVANCED support. */
+
+Index: src/headers/spatialite/gaiaconfig-msvc.h.in
+==================================================================
+--- src/headers/spatialite/gaiaconfig-msvc.h.in
++++ src/headers/spatialite/gaiaconfig-msvc.h.in
+@@ -8,11 +8,11 @@
+ 
+ /* Should be defined in order to enable LIBXML2 support. */
+ #define ENABLE_LIBXML2 1
+ 
+ /* Should be defined in order to enable RTTOPO support. */
+-#define ENABLE_RTTOPO 1
++#define ENABLE_RTTOPO 0
+ 
+ /* Should be defined in order to enable GEOS_370 support. */
+ #define GEOS_370 1
+ 
+ /* Should be defined in order to enable GEOS_ADVANCED support. */
+
+Index: src/headers/spatialite/gaiaconfig.h
+==================================================================
+--- src/headers/spatialite/gaiaconfig.h
++++ src/headers/spatialite/gaiaconfig.h
+@@ -1,10 +1,10 @@
+ /* ./src/headers/spatialite/gaiaconfig.h.  Generated from gaiaconfig.h.in by configure.  */
+ /* ./src/headers/spatialite/gaiaconfig.h.in - manually maintained */
+ 
+ /* Should be defined in order to enable GCP support. */
+-#define ENABLE_GCP 1
++#define ENABLE_GCP 0
+ 
+ /* Should be defined in order to enable GeoPackage support. */
+ #define ENABLE_GEOPACKAGE 1
+ 
+ /* Should be defined in order to enable LIBXML2 support. */
+@@ -12,11 +12,11 @@
+ 
+ /* Should be defined in order to enable MiniZIP support. */
+ #define ENABLE_MINIZIP 1
+ 
+ /* Should be defined in order to enable RTTOPO support. */
+-#define ENABLE_RTTOPO 1
++#define ENABLE_RTTOPO 0
+ 
+ /* Should be defined in order to enable GEOS_370 support. */
+ #define GEOS_370 1
+ 
+ /* Should be defined in order to enable GEOS_3100 support. */
