@@ -8,7 +8,7 @@ source:
   url: https://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-{{ version }}.tar.gz
   sha256: 43be2dd349daffe016dd1400c5d11285828c22fea35ca5109f21f3ed50605080
   patches:
-    - patches/0001-win_fix_paths.patch    # [win]
+    - patches/0001-win_fix_paths_no_gpl.patch    # [win]
     - patches/0002-osx_fix_lib_ext.patch  # [osx]
     # skip tests calling InitSpatialMetadataFull (which require GPL dependency RTTOPO through call of CreateVectorCoveragesTables)
     - patches/0003-skip-GPL-tests.patch   # [unix]
