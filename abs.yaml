@@ -1,1 +1,3 @@
-aggregate_branch: 3.12
+aggregate_branch: libxml_2.13.1
+channels:
+  scrass_org: libxml2_2.13.1
