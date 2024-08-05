@@ -14,7 +14,7 @@ source:
     - patches/0003-skip-GPL-tests.patch   # [unix]
 
 build:
-  number: 0
+  number: 1
   # Missing dependencies freexl and geos on s390x.
   skip: true  # [(win and vc<14) or s390x]
   run_exports:
