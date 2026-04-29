@@ -13,9 +13,10 @@ source:
     - patches/0002-osx_fix_lib_ext.patch  # [osx]
     # skip tests calling InitSpatialMetadataFull (which require GPL dependency RTTOPO through call of CreateVectorCoveragesTables)
     - patches/0003-skip-GPL-tests.patch   # [unix]
+    - patches/0004-guard-nanohttp-cleanup.patch
 
 build:
-  number: 3
+  number: 4
   run_exports:
     - {{ pin_subpackage('libspatialite', max_pin='x.x') }}
 
