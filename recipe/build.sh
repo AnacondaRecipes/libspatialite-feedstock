@@ -9,6 +9,11 @@ if [ -f ${PREFIX}/${HOST}/lib/libstdc++.la ]; then
     find ${PREFIX} -name "*.la" -print0 | xargs -0 rm
 fi
 
+# Remove known-broken tests before autotools regenerate the Makefile
+sed -i.bak \
+    -e 's/check_xls_load\$(EXEEXT) //g' \
+    -e 's/check_virtualtable4\$(EXEEXT) //g' \
+    test/Makefile.in
 # Disabling geos 3.10 and 3.11 as we are building against geos 3.9
 # Disabling rttopo and gcp as both modules strictly depend on code released under the GPLv2+
   ./configure --prefix=${PREFIX} \
